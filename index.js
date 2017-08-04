@@ -12,16 +12,19 @@ var domParserOptions = { decodeEntities: true };
 /**
  * Convert HTML string to React elements.
  *
- * @param  {String}   html              - The HTML string.
- * @param  {Object}   [options]         - The additional options.
- * @param  {Function} [options.replace] - The replace method.
+ * @param  {String}   html               - The HTML string.
+ * @param  {Object}   [options]          - The additional options.
+ * @param  {Function} [options.replace]  - The replace method.
+ * @param  {Object}   [additional_props] - Additional properties to pass down
  * @return {ReactElement|Array}
  */
-function HTMLReactParser(html, options) {
+function HTMLReactParser(html, options, additional_props) {
+    additional_props = additional_props || {};
+
     if (typeof html !== 'string') {
         throw new TypeError('First argument must be a string');
     }
-    return domToReact(htmlToDOM(html, domParserOptions), options);
+    return domToReact(htmlToDOM(html, domParserOptions), options, additional_props);
 }
 
 /**
